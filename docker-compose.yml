@@ -1,0 +1,24 @@
+services:
+
+  attacker:
+    build: attacker
+    ports:
+      - "1389:1389"
+      - "8000:8000"
+      
+  attacker_shell:
+    image: alpine
+    command: nc -lvnp 4444
+    restart: always
+    stdin_open: true
+    tty: true
+
+  victim:
+    build: victim
+    ports:
+      - "8080:8080"
+    stdin_open: true
+    tty: true
+
+  
+
